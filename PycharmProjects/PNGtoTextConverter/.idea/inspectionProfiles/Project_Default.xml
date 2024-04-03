@@ -1,0 +1,45 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <value>
+          <list size="25">
+            <item index="0" class="java.lang.String" itemvalue="wasabi" />
+            <item index="1" class="java.lang.String" itemvalue="spacy-loggers" />
+            <item index="2" class="java.lang.String" itemvalue="cython" />
+            <item index="3" class="java.lang.String" itemvalue="pre-commit" />
+            <item index="4" class="java.lang.String" itemvalue="spacy-legacy" />
+            <item index="5" class="java.lang.String" itemvalue="srsly" />
+            <item index="6" class="java.lang.String" itemvalue="flake8" />
+            <item index="7" class="java.lang.String" itemvalue="preshed" />
+            <item index="8" class="java.lang.String" itemvalue="pytest-timeout" />
+            <item index="9" class="java.lang.String" itemvalue="pydantic" />
+            <item index="10" class="java.lang.String" itemvalue="typer" />
+            <item index="11" class="java.lang.String" itemvalue="pytest" />
+            <item index="12" class="java.lang.String" itemvalue="black" />
+            <item index="13" class="java.lang.String" itemvalue="ml_datasets" />
+            <item index="14" class="java.lang.String" itemvalue="pathy" />
+            <item index="15" class="java.lang.String" itemvalue="types-requests" />
+            <item index="16" class="java.lang.String" itemvalue="catalogue" />
+            <item index="17" class="java.lang.String" itemvalue="tqdm" />
+            <item index="18" class="java.lang.String" itemvalue="langcodes" />
+            <item index="19" class="java.lang.String" itemvalue="cymem" />
+            <item index="20" class="java.lang.String" itemvalue="thinc" />
+            <item index="21" class="java.lang.String" itemvalue="murmurhash" />
+            <item index="22" class="java.lang.String" itemvalue="mock" />
+            <item index="23" class="java.lang.String" itemvalue="hypothesis" />
+            <item index="24" class="java.lang.String" itemvalue="types-mock" />
+          </list>
+        </value>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyPep8Inspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="ignoredErrors">
+        <list>
+          <option value="E128" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>
