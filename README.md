@@ -1,4 +1,4 @@
-# image2text-analyzer
+# Image2text Analyzer
 
 ## Overview
 Image2Text Analyzer is a web application that extracts text from images using OCR (Optical Character Recognition) and performs text analysis, including sentiment analysis and keyword extraction.
