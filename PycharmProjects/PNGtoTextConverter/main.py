@@ -5,9 +5,9 @@ import io
 from collections import Counter
 import re
 from sklearn.feature_extraction.text import ENGLISH_STOP_WORDS
-from wordcloud import WordCloud
-import matplotlib.pyplot as plt
 import seaborn as sns
+import matplotlib.pyplot as plt
+from textblob import TextBlob
 
 # Set path to Tesseract executable
 tess.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
@@ -41,16 +41,40 @@ def extract_keywords(text):
     top_keywords = [word for word, freq in word_freq.most_common(30)]
     return top_keywords, word_freq
 
+def analyze_sentiment(text):
+    blob = TextBlob(text)
+    sentiment_score = blob.sentiment.polarity
+    if sentiment_score > 0:
+        return "Positive"
+    elif sentiment_score < 0:
+        return "Negative"
+    else:
+        return "Neutral"
+
 def main():
-    st.title("Image Text Extractor and Keyword Extractor")
+    st.title("Image2Text Analyzer")
+    st.markdown(
+        """
+        <style>
+        .reportview-container {
+            background: url("https://example.com/background_image.jpg");
+            background-size: cover;
+        }
+        .sidebar .sidebar-content {
+            background: linear-gradient(to right, #b3ffab, #12fff7);
+            color: black;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
 
     # Upload Image
-    st.header("Upload Image")
-    uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
+    st.header("Choose an image...")
+    uploaded_file = st.file_uploader("", type=["jpg", "jpeg", "png"])
 
     if uploaded_file is not None:
         # Display the uploaded image
-        st.subheader("Uploaded Image")
         image = Image.open(uploaded_file)
 
         # Button to trigger text extraction
@@ -59,8 +83,11 @@ def main():
             extracted_text = extract_text(image)
 
             if extracted_text:
+                # Analyze sentiment of extracted text
+                sentiment = analyze_sentiment(extracted_text)
+                st.subheader(f"Sentiment: {sentiment}")
+
                 # Provide a download link for the extracted text and keywords
-                st.subheader("Download Extracted Text and Keywords")
                 col1, col2 = st.columns(2)
                 with col1:
                     st.download_button(
@@ -79,14 +106,6 @@ def main():
                         file_name="extracted_keywords.txt",
                         mime="text/plain"
                     )
-
-                # Visualization: Word cloud of keywords
-                st.subheader("Keyword Word Cloud")
-                wordcloud = WordCloud(width=800, height=400, background_color='white').generate_from_frequencies(word_freq)
-                plt.figure(figsize=(10, 6))
-                plt.imshow(wordcloud, interpolation='bilinear')
-                plt.axis('off')
-                st.pyplot(plt.gcf())  # Pass the current figure to st.pyplot()
 
 if __name__ == "__main__":
     main()
