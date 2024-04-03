@@ -5,8 +5,6 @@ import io
 from collections import Counter
 import re
 from sklearn.feature_extraction.text import ENGLISH_STOP_WORDS
-import seaborn as sns
-import matplotlib.pyplot as plt
 from textblob import TextBlob
 
 # Set path to Tesseract executable
