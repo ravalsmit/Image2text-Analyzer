@@ -2,8 +2,12 @@ import streamlit as st
 import pytesseract as tess
 from PIL import Image
 import io
-from sklearn.feature_extraction.text import TfidfVectorizer
+from collections import Counter
+import re
 from sklearn.feature_extraction.text import ENGLISH_STOP_WORDS
+from wordcloud import WordCloud
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 # Set path to Tesseract executable
 tess.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
@@ -18,19 +22,24 @@ def extract_text(image):
         return None
 
 def extract_keywords(text):
-    # Define custom stop words
-    custom_stopwords = list(ENGLISH_STOP_WORDS) + ["example", "words", "to", "remove", "from", "keywords"]
+    # Remove stop words
+    custom_stopwords = set(ENGLISH_STOP_WORDS)
+    words = re.findall(r'\b\w+\b', text.lower())
+    words = [word for word in words if word not in custom_stopwords]
 
-    # Extract keywords using TF-IDF
-    tfidf_vectorizer = TfidfVectorizer(stop_words=custom_stopwords)
-    tfidf_matrix = tfidf_vectorizer.fit_transform([text])
-    feature_names = tfidf_vectorizer.get_feature_names_out()
-    scores = tfidf_matrix.toarray()[0]
+    # Filter out non-keywords based on specific conditions
+    keywords = []
+    for word in words:
+        # Exclude single-character words and numeric values
+        if len(word) > 3 and not word.isdigit():
+            keywords.append(word)
 
-    # Sort the features based on TF-IDF scores
-    sorted_indices = scores.argsort()[::-1]
-    top_keywords = [feature_names[i] for i in sorted_indices[:10]]  # Extract top 10 keywords
-    return top_keywords
+    # Get word frequencies
+    word_freq = Counter(keywords)
+
+    # Get top 30 keywords based on frequency
+    top_keywords = [word for word, freq in word_freq.most_common(30)]
+    return top_keywords, word_freq
 
 def main():
     st.title("Image Text Extractor and Keyword Extractor")
@@ -43,25 +52,41 @@ def main():
         # Display the uploaded image
         st.subheader("Uploaded Image")
         image = Image.open(uploaded_file)
-        st.image(image, caption="Uploaded Image", use_column_width=True)
 
         # Button to trigger text extraction
         if st.button("Extract Text"):
-            st.info("Extracting text... This may take a moment.")
-
             # Extract text from image
             extracted_text = extract_text(image)
 
             if extracted_text:
-                st.success("Text extraction successful!")
-                # Display extracted text
-                st.subheader("Extracted Text")
-                st.text(extracted_text)
+                # Provide a download link for the extracted text and keywords
+                st.subheader("Download Extracted Text and Keywords")
+                col1, col2 = st.columns(2)
+                with col1:
+                    st.download_button(
+                        label="Download Extracted Text",
+                        data=extracted_text,
+                        file_name="extracted_text.txt",
+                        mime="text/plain"
+                    )
+                with col2:
+                    # Extract keywords from extracted text
+                    keywords, word_freq = extract_keywords(extracted_text)
+                    keywords_text = "\n".join(keywords)
+                    st.download_button(
+                        label="Download Keywords",
+                        data=keywords_text,
+                        file_name="extracted_keywords.txt",
+                        mime="text/plain"
+                    )
 
-                # Extract keywords from extracted text
-                keywords = extract_keywords(extracted_text)
-                st.subheader("Keywords Extracted")
-                st.write(keywords)
+                # Visualization: Word cloud of keywords
+                st.subheader("Keyword Word Cloud")
+                wordcloud = WordCloud(width=800, height=400, background_color='white').generate_from_frequencies(word_freq)
+                plt.figure(figsize=(10, 6))
+                plt.imshow(wordcloud, interpolation='bilinear')
+                plt.axis('off')
+                st.pyplot(plt.gcf())  # Pass the current figure to st.pyplot()
 
 if __name__ == "__main__":
     main()
