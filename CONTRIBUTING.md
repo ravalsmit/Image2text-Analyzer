@@ -6,7 +6,7 @@ Thank you for considering contributing to Image2Text Analyzer! By participating 
 
 If you encounter a bug, have a feature request, or need assistance, please follow these steps to report an issue:
 
-1. **Search for Existing Issues**: Before creating a new issue, search the [issue tracker](https://github.com/your-username/Image2Text-Analyzer/issues) to see if a similar issue has already been reported.
+1. **Search for Existing Issues**: Before creating a new issue, search to see if a similar issue has already been reported.
 
 2. **Create a New Issue**: If your issue isn't already documented, click on the "New Issue" button and select the appropriate issue template. Provide as much detail as possible, including steps to reproduce the issue and any relevant error messages.
 
