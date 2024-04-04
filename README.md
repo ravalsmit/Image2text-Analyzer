@@ -37,7 +37,3 @@ To run the application, execute the following command: streamlit run main.py
 - `pillow`: 8.4.0
 - `scikit-learn`: 0.24.2
 - `textblob`: 0.15.3
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
