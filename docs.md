@@ -52,7 +52,3 @@ If you encounter any issues or have questions about Image2Text Analyzer, please 
 ## Contributing
 
 We welcome contributions from the community! If you'd like to contribute to Image2Text Analyzer, please refer to the [CONTRIBUTING.md](CONTRIBUTING.md) file for guidelines.
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
