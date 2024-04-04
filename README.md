@@ -1,34 +1,43 @@
-# Image2text Analyzer
+# Image2Text Analyzer
 
-## Overview
-Image2Text Analyzer is a web application that extracts text from images using OCR (Optical Character Recognition) and performs text analysis, including sentiment analysis and keyword extraction.
+Image2Text Analyzer is a Streamlit web application that allows users to upload images containing text, extract the text using Tesseract OCR, perform spell-checking, sentiment analysis, and extract keywords from the extracted text.
 
-## Features:
-- Text Extraction: Upload an image containing text, and the app will extract the text using OCR.
-- Sentiment Analysis: Analyze the sentiment of the extracted text (Positive, Negative, Neutral).
-- Keyword Extraction: Extract keywords from the text and visualize their frequency.
-- Customizable Plots: Choose which plots to display based on user preferences.
+## Features
 
-## Usage:
-1. Upload Image: Choose an image containing text.
-2. Extract Text: Extract text from the uploaded image.
-3. View Analysis: See sentiment analysis, download extracted text and keywords, and view selected plots.
+- **Text Extraction**: Upload an image and extract text using Tesseract OCR.
+- **Spell Checking**: Perform spell-checking on the extracted text to correct any misspelled words.
+- **Sentiment Analysis**: Analyze the sentiment of the extracted and corrected text (positive, negative, or neutral).
+- **Keyword Extraction**: Extract keywords from the corrected text based on word frequencies.
 
-## Installation:
+## Usage
+
+1. **Upload Image**: Click on the "Choose an image..." button to upload an image containing text.
+2. **Extract Text**: After uploading the image, click on the "Extract Text" button to extract text from the image.
+3. **View Results**: Once the text is extracted, the sentiment analysis result will be displayed, and you can download the extracted text, corrected text, and extracted keywords.
+
+## Installation
+
 1. Clone the repository: git clone https://github.com/ravalsmit/image2text-analyzer.git
-2. Navigate to the project directory: cd image2text-analyzer
+2. Navigate to the project directory: cd Image2Text-Analyzer
 3. Install dependencies: pip install -r requirements.txt
 
-## Run:
-Run the Streamlit app: streamlit run app.py
+## Run
+
+To run the application, execute the following command: streamlit run main.py
 
 ## Technologies Used:
 - Streamlit: For building the web application.
 - PyTesseract: For OCR.
 - TextBlob: For sentiment analysis.
 
-## Contributing:
-Contributions are welcome! Feel free to open an issue or submit a pull request.
+## Dependencies
 
-## License:
-This project is licensed under the MIT License. See the LICENSE file for details.
+- `streamlit`: 0.87.0
+- `pytesseract`: 0.3.8
+- `pillow`: 8.4.0
+- `scikit-learn`: 0.24.2
+- `textblob`: 0.15.3
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
