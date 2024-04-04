@@ -1,12 +1,12 @@
+import re
+import difflib
 import streamlit as st
 import pytesseract as tess
+
 from PIL import Image
-import io
-from collections import Counter
-import re
-from sklearn.feature_extraction.text import ENGLISH_STOP_WORDS
 from textblob import TextBlob
-import difflib
+from collections import Counter
+from sklearn.feature_extraction.text import ENGLISH_STOP_WORDS
 
 # Set path to Tesseract executable
 tess.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
